@@ -33,6 +33,10 @@
     gap: 10px;
 }
 
+.container .inpContainer i{
+    cursor: pointer;
+}
+
 .container .inpContainer .checkbox {
     display: flex;
     align-items: center;

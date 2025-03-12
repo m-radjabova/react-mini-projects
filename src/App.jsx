@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 
 const App = () => {
     const [tasks, setTasks] = useState([
@@ -21,7 +21,6 @@ const App = () => {
 
     const [newTask, setNewTask] = useState("");
     const [filter, setFilter] = useState("all");
-    const inputRef = useRef(null);
 
     const tasksCount = tasks.filter(task => !task.completed).length;
 
@@ -37,7 +36,6 @@ const App = () => {
             ]);
             setNewTask("");
         }
-        inputRef.current.focus();
     };
 
     const toggleTask = (taskId) => {
@@ -62,7 +60,6 @@ const App = () => {
             <div className="p-4">
                 <h1>THINGS TO DO</h1>
                 <input
-                    ref={inputRef}
                     className="form-control mb-3"
                     placeholder="Add a new task..."
                     type="text"
