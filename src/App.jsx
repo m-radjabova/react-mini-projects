@@ -1,104 +1,200 @@
 import React, { useState } from "react";
 
 const App = () => {
-    const [tasks, setTasks] = useState([
+    const [users, setUsers] = useState([
         {
             id: 1,
-            text: "Learn Javascript",
-            completed: false,
+            firstName: "Mark",
+            lastName: "Smith",
+            age: 25,
+            country: "Uzbekistan",
+            gender: "male"
         },
         {
             id: 2,
-            text: "Learn React",
-            completed: false,
-        },
-        {
-            id: 3,
-            text: "Build a React App",
-            completed: false,
-        },
+            firstName: "Nata",
+            lastName: "Alekseyeva",
+            age: 30,
+            country: "Russia",
+            gender: "female"
+        }
     ]);
 
-    const [newTask, setNewTask] = useState("");
-    const [filter, setFilter] = useState("all");
-
-    const tasksCount = tasks.filter(task => !task.completed).length;
-
-    const addTask = () => {
-        if (newTask.trim()) {
-            setTasks([
-               ...tasks,
-                {
-                    id: tasks.length + 1,
-                    text: newTask,
-                    completed: false,
-                },
-            ]);
-            setNewTask("");
-        }
-    };
-
-    const toggleTask = (taskId) => {
-        setTasks(tasks.map(task =>
-            task.id === taskId ? { ...task, completed: !task.completed } : task
-        ));
-    };
-
-    const filteredTasks = tasks.filter(task => {
-        if (filter === "all") return true;
-        if (filter === "active") return !task.completed;
-        if (filter === "completed") return task.completed;
-        return true;
+    const [newUser, setNewUser] = useState({
+        firstName: "",
+        lastName: "",
+        age: "",
+        country: "",
+        gender: ""
     });
 
-    const deleteTask = (taskId) => {
-        setTasks(tasks.filter(task => task.id !== taskId));
+    const [isEditing, setIsEditing] = useState(false);
+    const [currentUserId, setCurrentUserId] = useState(null);
+
+    const handleChange = (e) => {
+        setNewUser({
+            ...newUser,
+            [e.target.name]: e.target.value
+        });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (isEditing) {
+            setUsers(users.map(user => 
+                user.id === currentUserId ? { ...user, ...newUser } : user
+            ));
+            setIsEditing(false);
+            setCurrentUserId(null);
+        } else {
+            setUsers([
+                ...users,
+                {
+                    id: users.length + 1,
+                    ...newUser
+                }
+            ]);
+        }
+        setNewUser({
+            firstName: "",
+            lastName: "",
+            age: "",
+            country: "",
+            gender: ""
+        });
+    };
+
+    const deleteUser = (id) => {
+        setUsers(users.filter(user => user.id !== id));
+    }
+
+
+    const editUser = (id) => {
+        const user = users.find(user => user.id === id);
+        setNewUser({
+            firstName: user.firstName,
+            lastName: user.lastName,
+            age: user.age,
+            country: user.country,
+            gender: user.gender
+        });
+        setIsEditing(true);
+        setCurrentUserId(id);
     }
 
     return (
         <div className="container">
-            <div className="p-4">
-                <h1>THINGS TO DO</h1>
-                <input
-                    className="form-control mb-3"
-                    placeholder="Add a new task..."
-                    type="text"
-                    value={newTask}
-                    onChange={(e) => setNewTask(e.target.value)}
-                    onKeyPress={(e) => {
-                        if (e.key === 'Enter') addTask();
-                    }}
-                />
-                <div className="inpContainer">
-                    {filteredTasks.map((task) => (
-                        <div key={task.id} className="task-item">
-                            <label className="checkbox">
-                                <input 
-                                    type="checkbox" 
-                                    checked={task.completed} 
-                                    onChange={() => toggleTask(task.id)} 
-                                />
-                                {task.text}
-                            </label>
-                            <i onClick={() => deleteTask(task.id)} className="bi bi-x-lg"></i>
-                        </div>
-                    ))}
+            <h1 className="text-center">Users</h1>
+            <form onSubmit={handleSubmit}>
+                <div className="form-group">
+                    <input 
+                        required
+                        className="form-control" 
+                        placeholder="First name"
+                        type="text"
+                        name="firstName"
+                        value={newUser.firstName}
+                        onChange={handleChange}
+                    />
+                    <input 
+                        required
+                        className="form-control" 
+                        placeholder="Last name"
+                        type="text"
+                        name="lastName"
+                        value={newUser.lastName}
+                        onChange={handleChange}
+                    />
                 </div>
-            </div>
-            <div className="bottom">
-                <div className="left-side">
-                    <div className="left">
-                        <i className="bi bi-plus" onClick={addTask}></i>
-                        <i className="bi bi-search"></i>
+                <div className="form-group">
+                    <input 
+                        required
+                        className="form-control"
+                        placeholder="Age"
+                        type="number"
+                        name="age"
+                        value={newUser.age}
+                        onChange={handleChange}
+                    />
+                    <select 
+                        className="form-select" 
+                        name="country"
+                        value={newUser.country}
+                        onChange={handleChange}
+                    >
+                        <option value="" disabled selected>Country</option>
+                        <option value="Uzbekistan">Uzbekistan</option>
+                        <option value="Russia">Russia</option>
+                        <option value="Turkey">Turkey</option>
+                        <option value="USA">USA</option>
+                        <option value="Germany">Germany</option>
+                        <option value="Argentina">Argentina</option>
+                        <option value="Brazil">Brazil</option>
+                        <option value="Colombia">Colombia</option>
+                        <option value="Mexico">Mexico</option>
+                    </select>
+                </div>
+                <div className="d-flex align-items-center justify-content-between">
+                    <div className="mt-3 d-flex">
+                        <label>
+                            <input 
+                                name="gender" 
+                                type="radio" 
+                                value="male"
+                                checked={newUser.gender === "male"}
+                                onChange={handleChange}
+                            />
+                            Male
+                        </label>
+                        <label>
+                            <input 
+                                name="gender" 
+                                type="radio" 
+                                value="female"
+                                checked={newUser.gender === "female"}
+                                onChange={handleChange}
+                            />
+                            Female
+                        </label>
                     </div>
-                    <span>{tasksCount} items left</span>
+                    <button className="btn btn-primary mt-3" type="submit">
+                        {isEditing ? "Update User" : "Add User"}
+                    </button>
                 </div>
-                <div className="right-side">
-                    <button className="btn" onClick={() => setFilter("all")}>All</button>
-                    <button className="btn" onClick={() => setFilter("active")}>Active</button>
-                    <button className="btn" onClick={() => setFilter("completed")}>Completed</button>
-                </div>
-            </div>
+            </form>
+
+            <h1 className="text-center mt-3">Users List</h1>
+            <table className="table mt-3 table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th >T/R</th>
+                        <th >First Name</th>
+                        <th >Last Name</th>
+                        <th >Age</th>
+                        <th >Country</th>
+                        <th >Gender</th>
+                        <th >Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        users.map(user => (
+                            <tr key={user.id}>
+                                <th >{user.id}</th>
+                                <td>{user.firstName}</td>
+                                <td>{user.lastName}</td>
+                                <td>{user.age}</td>
+                                <td>{user.country}</td>
+                                <td>{user.gender}</td>
+                                <td className="icons">
+                                    <i onClick={() => deleteUser(user.id)} className="bi bi-person-x-fill"></i>
+                                    <i onClick={() => editUser(user.id)} className="bi bi-pencil-square"></i>
+                                </td>
+                            </tr>
+                        ))
+                    }
+                </tbody>
+            </table>
         </div>
     );
 };
