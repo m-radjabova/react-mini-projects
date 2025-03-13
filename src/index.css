@@ -1,14 +1,19 @@
+body{
+    background-color: #b9f4bb !important;
+}
+
 .container {
     margin-top: 20px;
     padding: 20px;
-    background-color: #f8f9fa;
+    background-color: #e8f5e9;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 128, 0, 0.2);
+    transition: all 0.3s ease-in-out;
 }
 
 .text-center {
     text-align: center;
-    color: #333;
+    color: #2e7d32;
 }
 
 .form-group {
@@ -22,15 +27,16 @@
     margin-bottom: 20px;
     flex: 1 1 calc(50% - 20px);
     padding: 10px;
-    border: 2px solid #ccc;
+    border: 2px solid #66bb6a;
     border-radius: 5px;
     font-size: 16px;
-    transition: border-color 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .form-group .form-control:focus,
 .form-group .form-select:focus {
-    border-color: #007bff;
+    border-color: #2e7d32;
+    box-shadow: 0 0 8px rgba(46, 125, 50, 0.5);
 }
 
 .mt-3 {
@@ -43,14 +49,15 @@
     margin-right: 1rem;
     font-size: 1.2rem;
     cursor: pointer;
-    color: #333;
+    color: #0d4e10;
+    transition: color 0.3s ease;
 }
 
 .mt-3 input[type="radio"] {
     appearance: none;
     width: 20px;
     height: 20px;
-    border: 2px solid #007bff;
+    border: 2px solid #2e7d32;
     border-radius: 50%;
     margin-right: 10px;
     position: relative;
@@ -59,8 +66,8 @@
 }
 
 .mt-3 input[type="radio"]:checked {
-    border-color: #007bff;
-    background-color: #007bff;
+    border-color: #2e7d32;
+    background-color: #2e7d32;
 }
 
 .mt-3 input[type="radio"]:checked::after {
@@ -80,40 +87,59 @@
     margin-bottom: 1rem;
     color: #212529;
     border-collapse: collapse;
+    transition: all 0.3s ease;
 }
 
 .table th,
 .table td {
     padding: 0.75rem;
     vertical-align: top;
-    border-top: 1px solid #dee2e6;
+    border-top: 1px solid #c8e6c9;
 }
 
 .table thead th {
     vertical-align: bottom;
-    border-bottom: 2px solid #dee2e6;
-    color: #007bff;
+    border-bottom: 2px solid #2e7d32;
+    color: #2e7d32;
 }
 
 .table-hover tbody tr:hover {
-    background-color: rgba(0, 123, 255, 0.1);
+    background-color: rgba(46, 125, 50, 0.1);
+    transition: background-color 0.3s ease;
 }
 
 .table-bordered {
-    border: 1px solid #dee2e6;
+    border: 1px solid #c8e6c9;
 }
 
 .table-bordered th,
 .table-bordered td {
-    border: 1px solid #dee2e6;
+    border: 1px solid #c8e6c9;
 }
 
 .icons i {
     cursor: pointer;
     margin-right: 10px;
-    transition: color 0.3s ease;
+    transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .icons i:hover {
-    color: #007bff;
+    color: #2e7d32;
+    transform: scale(1.2);
+}
+
+button.btn-primary {
+    background-color: #2e7d32;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+button.btn-primary:hover {
+    background-color: #1b5e20;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(27, 94, 32, 0.3);
 }
