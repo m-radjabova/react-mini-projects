@@ -70,7 +70,7 @@ const App = () => {
 
 
     const editUser = (id) => {
-        const user = users.find(user => user.id === id);
+        const user = users.map(user => user.id === id);
         setNewUser({
             firstName: user.firstName,
             lastName: user.lastName,
