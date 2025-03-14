@@ -1,145 +1,73 @@
+@import "./component/css/content.css";
+@import "./component/css/chats.css";
+@import "./component/css/input.css";
+
 body{
-    background-color: #b9f4bb !important;
+    background-color: #9fe2e1 !important;
 }
-
 .container {
-    margin-top: 20px;
-    padding: 20px;
-    background-color: #e8f5e9;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 128, 0, 0.2);
-    transition: all 0.3s ease-in-out;
-}
-
-.text-center {
-    text-align: center;
-    color: #2e7d32;
-}
-
-.form-group {
+    width: 100% !important;
+    margin-top: 10px;
     display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
+    flex-direction: row;
+    height: 700px;
 }
 
-.form-group .form-control,
-.form-group .form-select {
-    margin-bottom: 20px;
-    flex: 1 1 calc(50% - 20px);
-    padding: 10px;
-    border: 2px solid #66bb6a;
-    border-radius: 5px;
-    font-size: 16px;
-    transition: all 0.3s ease;
-}
-
-.form-group .form-control:focus,
-.form-group .form-select:focus {
-    border-color: #2e7d32;
-    box-shadow: 0 0 8px rgba(46, 125, 50, 0.5);
-}
-
-.mt-3 {
-    margin-top: 1rem;
-}
-
-.mt-3 label {
-    display: flex;
-    align-items: center;
-    margin-right: 1rem;
-    font-size: 1.2rem;
-    cursor: pointer;
-    color: #0d4e10;
-    transition: color 0.3s ease;
-}
-
-.mt-3 input[type="radio"] {
-    appearance: none;
-    width: 20px;
-    height: 20px;
-    border: 2px solid #2e7d32;
-    border-radius: 50%;
-    margin-right: 10px;
-    position: relative;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.mt-3 input[type="radio"]:checked {
-    border-color: #2e7d32;
-    background-color: #2e7d32;
-}
-
-.mt-3 input[type="radio"]:checked::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 10px;
-    height: 10px;
-    background-color: white;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.table {
-    width: 100%;
-    margin-bottom: 1rem;
-    color: #212529;
-    border-collapse: collapse;
-    transition: all 0.3s ease;
-}
-
-.table th,
-.table td {
-    padding: 0.75rem;
-    vertical-align: top;
-    border-top: 1px solid #c8e6c9;
-}
-
-.table thead th {
-    vertical-align: bottom;
-    border-bottom: 2px solid #2e7d32;
-    color: #2e7d32;
-}
-
-.table-hover tbody tr:hover {
-    background-color: rgba(46, 125, 50, 0.1);
-    transition: background-color 0.3s ease;
-}
-
-.table-bordered {
-    border: 1px solid #c8e6c9;
-}
-
-.table-bordered th,
-.table-bordered td {
-    border: 1px solid #c8e6c9;
-}
-
-.icons i {
-    cursor: pointer;
-    margin-right: 10px;
-    transition: transform 0.3s ease, color 0.3s ease;
-}
-
-.icons i:hover {
-    color: #2e7d32;
-    transform: scale(1.2);
-}
-
-button.btn-primary {
-    background-color: #2e7d32;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
+.sidebar {
+    width: 300px;
+    background-color: #46b4b2;
     color: white;
-    font-size: 16px;
-    transition: all 0.3s ease;
+    padding: 20px 10px;
+    box-shadow: 2px 0 5px rgba(43, 41, 41, 0.1);
+    animation: fadeIn 0.5s ease-in-out;
 }
 
-button.btn-primary:hover {
-    background-color: #1b5e20;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(27, 94, 32, 0.3);
+.container .sidebar .list-group-item {
+    background-color: #90d8d7;
+    font-size: 20px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.container .sidebar .list-group-item:hover {
+    background-color: #3f8281;
+    color: white;
+    transform: scale(1.05);
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleUp {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
 }

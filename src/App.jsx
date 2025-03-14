@@ -1,200 +1,69 @@
-import React, { useState } from "react";
+import React from "react";
+import Sidebar from "./component/Sidebar";
+import Content from "./component/Content";
+import User from "./component/User";
+import Chats from "./component/Chats";
+import './index.css';
 
 const App = () => {
-    const [users, setUsers] = useState([
-        {
-            id: 1,
-            firstName: "Mark",
-            lastName: "Smith",
-            age: 25,
-            country: "Uzbekistan",
-            gender: "male"
-        },
-        {
-            id: 2,
-            firstName: "Nata",
-            lastName: "Alekseyeva",
-            age: 30,
-            country: "Russia",
-            gender: "female"
-        }
-    ]);
-
-    const [newUser, setNewUser] = useState({
-        firstName: "",
-        lastName: "",
-        age: "",
-        country: "",
-        gender: ""
-    });
-
-    const [isEditing, setIsEditing] = useState(false);
-    const [currentUserId, setCurrentUserId] = useState(null);
-
-    const handleChange = (e) => {
-        setNewUser({
-            ...newUser,
-            [e.target.name]: e.target.value
-        });
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (isEditing) {
-            setUsers(users.map(user => 
-                user.id === currentUserId ? { ...user, ...newUser } : user
-            ));
-            setIsEditing(false);
-            setCurrentUserId(null);
-        } else {
-            setUsers([
-                ...users,
-                {
-                    id: users.length + 1,
-                    ...newUser
-                }
-            ]);
-        }
-        setNewUser({
-            firstName: "",
-            lastName: "",
-            age: "",
-            country: "",
-            gender: ""
-        });
-    };
-
-    const deleteUser = (id) => {
-        setUsers(users.filter(user => user.id !== id));
-    }
-
-
-    const editUser = (id) => {
-        const user = users.map(user => user.id === id);
-        setNewUser({
-            firstName: user.firstName,
-            lastName: user.lastName,
-            age: user.age,
-            country: user.country,
-            gender: user.gender
-        });
-        setIsEditing(true);
-        setCurrentUserId(id);
-    }
-
     return (
         <div className="container">
-            <h1 className="text-center">Users</h1>
-            <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <input 
-                        required
-                        className="form-control" 
-                        placeholder="First name"
-                        type="text"
-                        name="firstName"
-                        value={newUser.firstName}
-                        onChange={handleChange}
-                    />
-                    <input 
-                        required
-                        className="form-control" 
-                        placeholder="Last name"
-                        type="text"
-                        name="lastName"
-                        value={newUser.lastName}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div className="form-group">
-                    <input 
-                        required
-                        className="form-control"
-                        placeholder="Age"
-                        type="number"
-                        name="age"
-                        value={newUser.age}
-                        onChange={handleChange}
-                    />
-                    <select 
-                        className="form-select" 
-                        name="country"
-                        value={newUser.country}
-                        onChange={handleChange}
-                    >
-                        <option value="" disabled selected>Country</option>
-                        <option value="Uzbekistan">Uzbekistan</option>
-                        <option value="Russia">Russia</option>
-                        <option value="Turkey">Turkey</option>
-                        <option value="USA">USA</option>
-                        <option value="Germany">Germany</option>
-                        <option value="Argentina">Argentina</option>
-                        <option value="Brazil">Brazil</option>
-                        <option value="Colombia">Colombia</option>
-                        <option value="Mexico">Mexico</option>
-                    </select>
-                </div>
-                <div className="d-flex align-items-center justify-content-between">
-                    <div className="mt-3 d-flex">
-                        <label>
-                            <input 
-                                name="gender" 
-                                type="radio" 
-                                value="male"
-                                checked={newUser.gender === "male"}
-                                onChange={handleChange}
-                            />
-                            Male
-                        </label>
-                        <label>
-                            <input 
-                                name="gender" 
-                                type="radio" 
-                                value="female"
-                                checked={newUser.gender === "female"}
-                                onChange={handleChange}
-                            />
-                            Female
-                        </label>
-                    </div>
-                    <button className="btn btn-primary mt-3" type="submit">
-                        {isEditing ? "Update User" : "Add User"}
-                    </button>
-                </div>
-            </form>
+            <div className="sidebar">
+                <Sidebar />
+                <User name="Alice 👩‍💼"/>  
+                <User name="Bob 👨‍💻"/>  
+                <User name="Charlie 🎸"/>  
+                <User name="David 🏀"/>  
+                <User name="Eve 📚"/>  
+                <User name="Frank 🎮"/>  
+                <User name="Grace 🎨"/>  
+                <User name="Henry 🚗"/>  
+                <User name="Emma 🎭"/>  
+                <User name="Isabella 🌸"/>  
+            </div>
+            <div className="content">
+                <Content />
+                <Chats>
+                    <div className="user-message">Hello 👋</div>
+                    <div className="response-message">How are you? 😊</div>
+                    <div className="user-message">I am fine, thanks! 👍</div>
+                    <div className="response-message">What about you? 🤔</div>
+                    <div className="user-message">I am also fine 😃</div>
+                    <div className="response-message">Good! 🎉</div>
+                    <div className="user-message">Thank you 🙏</div>
+                    <div className="response-message">You are welcome! 🤗</div>
+                    <div className="user-message">Goodbye! 👋</div>
+                    <div className="response-message">See you later! 👀</div>
 
-            <h1 className="text-center mt-3">Users List</h1>
-            <table className="table mt-3 table-hover table-bordered">
-                <thead>
-                    <tr>
-                        <th >T/R</th>
-                        <th >First Name</th>
-                        <th >Last Name</th>
-                        <th >Age</th>
-                        <th >Country</th>
-                        <th >Gender</th>
-                        <th >Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        users.map(user => (
-                            <tr key={user.id}>
-                                <th >{user.id}</th>
-                                <td>{user.firstName}</td>
-                                <td>{user.lastName}</td>
-                                <td>{user.age}</td>
-                                <td>{user.country}</td>
-                                <td>{user.gender}</td>
-                                <td className="icons">
-                                    <i onClick={() => deleteUser(user.id)} className="bi bi-person-x-fill"></i>
-                                    <i onClick={() => editUser(user.id)} className="bi bi-pencil-square"></i>
-                                </td>
-                            </tr>
-                        ))
-                    }
-                </tbody>
-            </table>
+                    <div className="user-message">Hey, long time no see! 🕰️</div>
+                    <div className="response-message">Yeah! How have you been? 🤩</div>
+                    <div className="user-message">I’ve been busy with work. 😓</div>
+                    <div className="response-message">Same here! Let’s catch up soon! ☕</div>
+                    
+                    <div className="user-message">Do you remember our last trip? 🌍</div>
+                    <div className="response-message">Of course! It was amazing! ✈️</div>
+                    <div className="user-message">We should plan another one. 🎒</div>
+                    <div className="response-message">Absolutely! Where do you want to go? 🏝️</div>
+                    
+                    <div className="user-message">Maybe somewhere warm and sunny! ☀️</div>
+                    <div className="response-message">Sounds perfect! Let’s make a plan. 📅</div>
+
+                    <div className="user-message">Okay, I’ll check the best places! 🗺️</div>
+                    <div className="response-message">Awesome! Let me know. 📨</div>
+
+                    <div className="user-message">By the way, did you finish that book I recommended? 📖</div>
+                    <div className="response-message">Yes! It was incredible! 🤯</div>
+                    <div className="user-message">I told you! The plot twist was crazy, right? 😱</div>
+                    <div className="response-message">Totally! I didn’t see it coming! 🔥</div>
+
+                    <div className="user-message">Let’s find another good book to read. 📚</div>
+                    <div className="response-message">Yes! I’ll send you some recommendations. 💌</div>
+                    
+                    <div className="user-message">Great! Talk soon. 🖐️</div>
+                    <div className="response-message">Bye! Take care. 💖</div>
+                </Chats>
+
+            </div>
         </div>
     );
 };
