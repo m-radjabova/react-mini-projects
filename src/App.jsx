@@ -1,71 +1,36 @@
-import React from "react";
-import Sidebar from "./component/Sidebar";
-import Content from "./component/Content";
-import User from "./component/User";
-import Chats from "./component/Chats";
-import './index.css';
+import React, { useState } from "react";
+import First from './component/First';
+import Second from './component/Second';
+import Third from './component/Third';
 
-const App = () => {
+function App() {
+    const [page, setPage] = useState(1);
+    const [users, setUsers] = useState([
+        { id: 1, name: 'John', age: 30, work: 'developer' },
+        { id: 2, name: 'Jane', age: 25, work: 'designer' },
+        { id: 3, name: 'Bob', age: 35, work: 'manager' },
+        { id: 4, name: 'Alice', age: 28, work: 'developer' },
+        { id: 5, name: 'Charlie', age: 32, work: 'designer' },
+        { id: 6, name: 'David', age: 27, work: 'manager' },
+    ]);
+
+    function addUser(user) {
+        setUsers([...users, user]);
+    }
+
     return (
-        <div className="container">
-            <div className="sidebar">
-                <Sidebar />
-                <User name="Alice 👩‍💼"/>  
-                <User name="Bob 👨‍💻"/>  
-                <User name="Charlie 🎸"/>  
-                <User name="David 🏀"/>  
-                <User name="Eve 📚"/>  
-                <User name="Frank 🎮"/>  
-                <User name="Grace 🎨"/>  
-                <User name="Henry 🚗"/>  
-                <User name="Emma 🎭"/>  
-                <User name="Isabella 🌸"/>  
-            </div>
-            <div className="content">
-                <Content />
-                <Chats>
-                    <div className="user-message">Hello 👋</div>
-                    <div className="response-message">How are you? 😊</div>
-                    <div className="user-message">I am fine, thanks! 👍</div>
-                    <div className="response-message">What about you? 🤔</div>
-                    <div className="user-message">I am also fine 😃</div>
-                    <div className="response-message">Good! 🎉</div>
-                    <div className="user-message">Thank you 🙏</div>
-                    <div className="response-message">You are welcome! 🤗</div>
-                    <div className="user-message">Goodbye! 👋</div>
-                    <div className="response-message">See you later! 👀</div>
+        <div className="container mt-5">
+            <button onClick={() => setPage(1)} className="btn btn-primary me-2 btn-lg">First Page</button>
+            <button onClick={() => setPage(2)} className="btn btn-success me-2 btn-lg">Second Page</button>
+            <button onClick={() => setPage(3)} className="btn btn-danger btn-lg">Third Page</button>
 
-                    <div className="user-message">Hey, long time no see! 🕰️</div>
-                    <div className="response-message">Yeah! How have you been? 🤩</div>
-                    <div className="user-message">I’ve been busy with work. 😓</div>
-                    <div className="response-message">Same here! Let’s catch up soon! ☕</div>
-                    
-                    <div className="user-message">Do you remember our last trip? 🌍</div>
-                    <div className="response-message">Of course! It was amazing! ✈️</div>
-                    <div className="user-message">We should plan another one. 🎒</div>
-                    <div className="response-message">Absolutely! Where do you want to go? 🏝️</div>
-                    
-                    <div className="user-message">Maybe somewhere warm and sunny! ☀️</div>
-                    <div className="response-message">Sounds perfect! Let’s make a plan. 📅</div>
-
-                    <div className="user-message">Okay, I’ll check the best places! 🗺️</div>
-                    <div className="response-message">Awesome! Let me know. 📨</div>
-
-                    <div className="user-message">By the way, did you finish that book I recommended? 📖</div>
-                    <div className="response-message">Yes! It was incredible! 🤯</div>
-                    <div className="user-message">I told you! The plot twist was crazy, right? 😱</div>
-                    <div className="response-message">Totally! I didn’t see it coming! 🔥</div>
-
-                    <div className="user-message">Let’s find another good book to read. 📚</div>
-                    <div className="response-message">Yes! I’ll send you some recommendations. 💌</div>
-                    
-                    <div className="user-message">Great! Talk soon. 🖐️</div>
-                    <div className="response-message">Bye! Take care. 💖</div>
-                </Chats>
-
-            </div>
+            {
+                page === 1 ? <First /> :
+                page === 2 ? <Second addUser={addUser} users={users} setUsers={setUsers} /> :
+                <Third users={users} />
+            }
         </div>
     );
-};
+}
 
 export default App;
