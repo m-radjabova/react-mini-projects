@@ -25,7 +25,7 @@ function Second(props) {
         };
 
         if (editMode) {
-            const updatedUsers = props.users.map(user => (user.id === user.id ? user : user));
+            const updatedUsers = props.users.map(u => (u.id === user.id ? user : u));
             props.setUsers(updatedUsers);
         } else {
             props.addUser(user);
