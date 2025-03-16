@@ -20,15 +20,34 @@ function App() {
 
     return (
         <div className="container mt-5">
-            <button onClick={() => setPage(1)} className="btn btn-primary me-2 btn-lg">First Page</button>
-            <button onClick={() => setPage(2)} className="btn btn-success me-2 btn-lg">Second Page</button>
-            <button onClick={() => setPage(3)} className="btn btn-danger btn-lg">Third Page</button>
+            <div className="d-flex justify-content-center mb-4">
+                <button 
+                    onClick={() => setPage(1)} 
+                    className={`btn ${page === 1 ? 'btn-primary' : 'btn-outline-primary'} me-2 btn-lg`}
+                >
+                    First Page
+                </button>
+                <button 
+                    onClick={() => setPage(2)} 
+                    className={`btn ${page === 2 ? 'btn-success' : 'btn-outline-success'} me-2 btn-lg`}
+                >
+                    Second Page
+                </button>
+                <button 
+                    onClick={() => setPage(3)} 
+                    className={`btn ${page === 3 ? 'btn-danger' : 'btn-outline-danger'} btn-lg`}
+                >
+                    Third Page
+                </button>
+            </div>
 
-            {
-                page === 1 ? <First /> :
-                page === 2 ? <Second addUser={addUser} users={users} setUsers={setUsers} /> :
-                <Third users={users} />
-            }
+            <div className="mt-4">
+                {
+                    page === 1 ? <First /> :
+                    page === 2 ? <Second addUser={addUser} users={users} setUsers={setUsers} /> :
+                    <Third users={users} />
+                }
+            </div>
         </div>
     );
 }

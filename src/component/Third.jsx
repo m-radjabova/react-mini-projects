@@ -2,14 +2,22 @@ import React from 'react'
 
 function Third(props) {
   return (
-    <div className='mt-3'>
-        <h1>Third Page</h1>
+    <div className="mt-5">
+        <h1 className="text-center text-success mb-4">Third Page</h1>
 
-        <ul className="list-group">
+        <ul className="list-group shadow-sm">
             {
                 props.users.map(user => (
-                    <li className="list-group-item" key={user.id}>
-                        {user.id} . {user.name} - {user.work}
+                    <li 
+                        className="list-group-item d-flex justify-content-between align-items-center" 
+                        key={user.id}
+                    >
+                        <span>
+                            <strong>{user.id}.</strong> {user.name} - {user.work}
+                        </span>
+                        <span className="badge bg-primary rounded-pill">
+                            ID: {user.id}
+                        </span>
                     </li>
                 ))
             }

@@ -46,11 +46,15 @@ function Second(props) {
     }
 
     return (
-        <div className="mt-3">
-            <h1>Second Page</h1>
-            <button className="btn btn-dark" onClick={handleShow}>Add User</button>
-            <table className="table table-striped">
-                <thead>
+        <div className="mt-5">
+            <h1 className="text-center text-primary mb-4">Second Page</h1>
+            <div className="d-flex justify-content-end mb-3">
+                <button className="btn btn-dark btn-lg" onClick={handleShow}>
+                    <i className="bi bi-person-plus"></i> Add User
+                </button>
+            </div>
+            <table className="table table-hover table-bordered shadow-sm">
+                <thead className="table-dark">
                     <tr>
                         <th>Id</th>
                         <th>Name</th>
@@ -60,68 +64,71 @@ function Second(props) {
                     </tr>
                 </thead>
                 <tbody>
-                    {
-                        props.users.map(user => (
-                            <tr key={user.id}>
-                                <td>{user.id}</td>
-                                <td>{user.name}</td>
-                                <td>{user.age}</td>
-                                <td>{user.work}</td>
-                                <td>
-                                    <button 
-                                        className="btn btn-danger" 
-                                        onClick={() => deleteUser(user.id)}>
-                                        Delete
-                                    </button>
-                                    <button 
-                                        className="btn btn-warning ms-2"
-                                        onClick={() => editUser(user)}>
-                                        Edit
-                                    </button>
-                                </td>
-                            </tr>
-                        ))
-                    }
+                    {props.users.map(user => (
+                        <tr key={user.id}>
+                            <td>{user.id}</td>
+                            <td>{user.name}</td>
+                            <td>{user.age}</td>
+                            <td>{user.work}</td>
+                            <td>
+                                <button
+                                    className="btn btn-danger btn-sm me-2"
+                                    onClick={() => deleteUser(user.id)}
+                                >
+                                    <i className="bi bi-trash"></i> Delete
+                                </button>
+                                <button
+                                    className="btn btn-warning btn-sm"
+                                    onClick={() => editUser(user)}
+                                >
+                                    <i className="bi bi-pencil-square"></i> Edit
+                                </button>
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
 
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
+            <Modal show={show} onHide={handleClose} centered>
+                <Modal.Header closeButton className="bg-primary text-white">
                     <Modal.Title>{editMode ? 'Edit User' : 'Add New User'}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <form onSubmit={handleSubmit}>
                         <div className="mb-3">
                             <label htmlFor="name" className="form-label">Name:</label>
-                            <input 
-                                id="name" 
-                                name="name" 
-                                placeholder="Enter Name..." 
-                                type="text" 
-                                className="form-control" 
-                                defaultValue={editMode && currentUser ? currentUser.name : ''} 
+                            <input
+                                id="name"
+                                name="name"
+                                placeholder="Enter Name..."
+                                type="text"
+                                className="form-control"
+                                defaultValue={editMode && currentUser ? currentUser.name : ''}
+                                required
                             />
                         </div>
                         <div className="mb-3">
                             <label htmlFor="age" className="form-label">Age:</label>
-                            <input 
-                                id="age" 
-                                name="age" 
-                                placeholder="Enter Age..." 
-                                type="number" 
-                                className="form-control" 
-                                defaultValue={editMode && currentUser ? currentUser.age : ''} 
+                            <input
+                                id="age"
+                                name="age"
+                                placeholder="Enter Age..."
+                                type="number"
+                                className="form-control"
+                                defaultValue={editMode && currentUser ? currentUser.age : ''}
+                                required
                             />
                         </div>
                         <div className="mb-3">
                             <label htmlFor="work" className="form-label">Work:</label>
-                            <input 
-                                id="work" 
-                                name="work" 
-                                placeholder="Enter Work..." 
-                                type="text" 
-                                className="form-control" 
-                                defaultValue={editMode && currentUser ? currentUser.work : ''} 
+                            <input
+                                id="work"
+                                name="work"
+                                placeholder="Enter Work..."
+                                type="text"
+                                className="form-control"
+                                defaultValue={editMode && currentUser ? currentUser.work : ''}
+                                required
                             />
                         </div>
                         <div className="text-end">
